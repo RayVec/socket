@@ -12,13 +12,20 @@ import java.util.List;
 
 public class ManageServerConClient {
 	public static HashMap hm=new HashMap<Integer,ServerConClientThread>();
+	public static ArrayList<Integer> accounts=new ArrayList<>();
 	
 	//添加一个客户端通信线程
 	public static void addClientThread(int account, ServerConClientThread cc){
 		hm.put(account,cc);
+		accounts.add(account);
 	}
 	public static void delClientThread(int account){
 	    hm.remove(account);
+	    for(int i=0;i<accounts.size();i++){
+	    	if(accounts.get(i)==account){
+	    		accounts.remove(i);
+			}
+		}
     }
 	//得到一个客户端通信线程
 	public static ServerConClientThread getClientThread(int i){

@@ -32,9 +32,9 @@ public class ServerConClientThread extends Thread {
 					if (m.getType().equals(ChatMessageType.COM_MES)) {//如果是普通消息包
 						//取得接收人的通信线程
 						int deskAccount = m.getReceiver();
-						if (deskAccount == Desk.ID) {
-							for (int n : Desk.members) {
-								if (ManageServerConClient.hm.containsKey(n) && n != m.getSender()) {
+						if (deskAccount==Desk.ID) {
+							for (int n : ManageServerConClient.accounts) {
+								if ( n != m.getSender()) {
 									ServerConClientThread scc = ManageServerConClient.getClientThread(n);
 									ObjectOutputStream oos = new ObjectOutputStream(scc.s.getOutputStream());
 									//向接收人发送消息
