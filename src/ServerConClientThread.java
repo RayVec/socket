@@ -46,6 +46,7 @@ public class ServerConClientThread extends Thread {
 					}
 				} catch (EOFException e){
 						ManageServerConClient.delClientThread(ID);
+						System.out.println(ID+"号用户下线了");
 						System.out.println("当前连接的线程一共有"+ManageServerConClient.hm.size());
 					    this.interrupt();
 					    break;

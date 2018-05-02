@@ -58,10 +58,10 @@ public class ChatServer {
 		           }
 	       }
 		        catch (StreamCorruptedException e ){
-			System.out.println("invalid stream header ,go on "+new Date());
+			         System.out.println("invalid stream header ,go on "+new Date());
 			}
 					catch (Exception e){
-			e.printStackTrace();
+			         e.printStackTrace();
 			}
 		}
 	}
