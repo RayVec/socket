@@ -4,23 +4,23 @@ import java.io.Serializable;
 
 public class ChatMessage implements Serializable{
 	String type;
-	int sender;
+	String sender;
 	String senderNick;
 	int senderAvatar;
-	int receiver;
+	String desk;
 	String content;
 	String sendTime;
-	
+	String cookie;
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
 	}
-	public int getSender() {
+	public String getSender() {
 		return sender;
 	}
-	public void setSender(int sender) {
+	public void setSender(String sender) {
 		this.sender = sender;
 	}
 	public String getSenderNick() {
@@ -35,11 +35,11 @@ public class ChatMessage implements Serializable{
 	public void setSenderAvatar(int senderAvatar) {
 		this.senderAvatar = senderAvatar;
 	}
-	public int getReceiver() {
-		return receiver;
+	public String getDesk() {
+		return desk;
 	}
-	public void setReceiver(int receiver) {
-		this.receiver = receiver;
+	public void setDesk(String desk) {
+		this.desk = desk;
 	}
 	public String getContent() {
 		return content;
@@ -53,6 +53,6 @@ public class ChatMessage implements Serializable{
 	public void setSendTime(String sendTime) {
 		this.sendTime = sendTime;
 	}
-	
-	
+	public String getCookie(){return this.cookie;}
+	public void setCookie(String cookie){this.cookie=cookie;}
 }

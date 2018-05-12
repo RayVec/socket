@@ -31,14 +31,14 @@ public class ChatServer {
 				ChatMessage m = new ChatMessage();
 				ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
 				if (u.getOperation().equals("login")) { //登录
-					int account = u.getAccount();
+					String account = u.getAccount();
 					System.out.println("[" + account + "]上线了！"+new Date());
 
 					//得到个人信息
 					//String user=udao.getUser(account);
 					//返回一个成功登陆的信息包，并附带个人信息
 					m.setType(ChatMessageType.SUCCESS);
-					m.setContent(Integer.toString(u.getAccount()));
+					m.setContent(u.getAccount());
 					oos.writeObject(m);
 					ServerConClientThread cct = new ServerConClientThread(s);//单开一个线程，让该线程与该客户端保持连接
 					cct.setID(u.getAccount());
