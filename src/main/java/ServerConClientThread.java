@@ -5,6 +5,8 @@
 import common.ChatMessage;
 import common.ChatMessageType;
 import common.Desk;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.*;
 
 
 public class ServerConClientThread extends Thread {
@@ -33,17 +36,22 @@ public class ServerConClientThread extends Thread {
 					String deskAccount = m.getDesk();
 					String url="http://112.74.177.29:8080/together/rtable/getMembers?rtableid="+deskAccount;
 					String result=HTTPUtils.doGet(url,m.getCookie());
-
-					if (deskAccount==Desk.ID) {
-							for (String n : ManageServerConClient.accounts) {
-								if ( n != m.getSender()) {
-									ServerConClientThread scc = ManageServerConClient.getClientThread(n);
-									ObjectOutputStream oos = new ObjectOutputStream(scc.s.getOutputStream());
-									//向接收人发送消息
-									oos.writeObject(m);
-									System.out.println("收到"+m.getSender()+"发来的消息["+m.getContent()+"]转发给"+deskAccount);
+					List<String> deskmembers=new ArrayList<String>();
+					JSONArray jsonArray=JSONArray.fromObject(result);
+					for(Object object:jsonArray){
+						JSONObject jsonObject=JSONObject.fromObject(object);
+						deskmembers.add(jsonObject.getString("userid"));
+					}
+					for (String deskmember : deskmembers) {
+								if ( !deskmember.equals(m.getSender())) {
+									if(ManageServerConClient.accounts.contains(deskmember)) {
+										ServerConClientThread scc = ManageServerConClient.getClientThread(deskmember);
+										ObjectOutputStream oos = new ObjectOutputStream(scc.s.getOutputStream());
+										//向接收人发送消息
+										oos.writeObject(m);
+										System.out.println(m.getDesk()+"圆桌内收到"+m.getSender()+" 发来的消息转发给"+deskmember);
+									}
 								}
-							}
 					}
 				} catch (EOFException e){
 						ManageServerConClient.delClientThread(ID);

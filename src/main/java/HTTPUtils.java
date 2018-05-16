@@ -7,6 +7,7 @@ import java.net.URL;
 
 public class HTTPUtils {
     public static String doGet(String target,String cookie){
+        String msg="";
         try{
             URL url = new URL(target);
             // 2. 创建HttpURLConnection对象
@@ -31,8 +32,6 @@ public class HTTPUtils {
             // 连接
             connection.connect();
 
-            // 从连接中读取响应信息
-            String msg = "";
             int code = connection.getResponseCode();
             if (code == 200) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -41,7 +40,6 @@ public class HTTPUtils {
                     msg += line + "\n";
                 }
                 reader.close();
-                return msg;
             }
             // 5. 断开连接
             connection.disconnect();
@@ -51,6 +49,7 @@ public class HTTPUtils {
             e.printStackTrace();
         }
         // 处理结果
-        return null;
+        return msg;
     }
+
 }

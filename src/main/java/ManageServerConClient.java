@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ManageServerConClient {
 	public static HashMap hm=new HashMap<String,ServerConClientThread>();
-	public static ArrayList<String> accounts=new ArrayList<>();
+	public static ArrayList<String> accounts=new ArrayList<String>();
 	
 	//添加一个客户端通信线程
 	public static void addClientThread(String account, ServerConClientThread cc){
@@ -30,16 +30,6 @@ public class ManageServerConClient {
 	//得到一个客户端通信线程
 	public static ServerConClientThread getClientThread(String i){
 		return (ServerConClientThread) hm.get(i);
-	}
-	//返回当前在线人的情况
-	public static List getAllOnLineUserid(){
-		List list=new ArrayList();
-		//使用迭代器完成
-		Iterator it=hm.keySet().iterator();
-		while(it.hasNext()){
-			list.add((int) it.next());
-		}
-		return list;
 	}
 
 }

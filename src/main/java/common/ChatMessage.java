@@ -11,6 +11,7 @@ public class ChatMessage implements Serializable{
 	String content;
 	String sendTime;
 	String cookie;
+	int deskAvatar;
 	public String getType() {
 		return type;
 	}
@@ -55,4 +56,6 @@ public class ChatMessage implements Serializable{
 	}
 	public String getCookie(){return this.cookie;}
 	public void setCookie(String cookie){this.cookie=cookie;}
+	public void setDeskAvatar(int deskAvatar){this.deskAvatar=deskAvatar;}
+	public int getDeskAvatar(){return this.deskAvatar;}
 }
